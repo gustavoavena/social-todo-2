@@ -16,8 +16,31 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 
+
+
+
+
+
+#need to import tasks.views.py file!!
 urlpatterns = [
-    url(r'^tasks/', include('tasks.urls')),
+    url(r'^task/', include('tasks.urls')),
+    url(r'^user/', include('users.urls')),
     url(r'^admin/', admin.site.urls),
 ]
 
+
+
+
+"""
+
+add view layer to express   
+add login forms to views
+handle submitted registration form
+Add mongodb support
+Add form validation
+Add session handling
+Add session persistence and password hashing
+Add tasks
+
+
+"""
