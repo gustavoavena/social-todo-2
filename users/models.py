@@ -6,6 +6,6 @@ from django.db import models
 
 
 class User(models.Model):
-	name = models.CharField(max_length=50, blank=False)
-	email = models.CharField(max_length=50, blank=False, unique=True)
-	hashed_password = models.CharField(max_length=200)
+	name = models.CharField(max_length=30, blank=False)
+	email = models.CharField(max_length=30, blank=False, unique=True)
+	hashed_password = models.CharField(max_length=30)

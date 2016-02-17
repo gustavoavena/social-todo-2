@@ -4,8 +4,8 @@ from django.http import HttpResponse
 # Create your views here.
 
 def index(request):
-    # return HttpResponse("Hello, world. You're at the tasks index.")
-   	return render(request, 'index.html', {"title": "cpsc 113", "message": "testing variables"})
+    return HttpResponse("Hello, world. You're at the tasks index.")
+   	# return render(request, 'index.html', {"title": "cpsc 113", "message": "testing variables"})
     
 def say_whatsup(request):
     return HttpResponse("Hello, WHAT IS UP?")
