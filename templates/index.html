@@ -110,13 +110,14 @@
 						<br/>
 						<input name="password" type="password" class="text-input" placeholder="password">
 						<br/>
-      					<button class="log-in-submit" form="login_form">Log In</button>
-						<br/> -->
+      					 -->
 						{% csrf_token %}
-    					{% for field in RegisterForm %}
+    					{% for field in LoginForm %}
     						{{ field.label_tag }}<br>
         					{{ field }}<br>
      					{% endfor %}
+     					<button class="log-in-submit" form="login_form">Log In</button>
+						<br/>
 						
 					</div>
 				</form>
