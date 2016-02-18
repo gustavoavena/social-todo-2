@@ -1,11 +1,13 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
+import users.forms as forms
 # Create your views here.
 
 def index(request):
-    # return HttpResponse("Hello, world. You're at the starter page!")
-   	return render(request, 'index.html', {"title": "cpsc 113", "message": "Starting page!"})
+	RegisterForm = forms.RegisterForm()
+	LoginForm = forms.LoginForm()
+	return render(request, 'index.html', {"title": "cpsc 113", "message": "Starting page!", 'RegisterForm' : RegisterForm, 'LoginForm': LoginForm})
     
 
 

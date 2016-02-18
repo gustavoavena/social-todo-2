@@ -5,7 +5,7 @@ from django.http import HttpResponse
 
 def index(request):
     return HttpResponse("Hello, world. You're at the tasks index.")
-   	# return render(request, 'index.html', {"title": "cpsc 113", "message": "testing variables"})
+   	# return render(request, 'index.html', {"title": "hasuaus", "message": "testing variables"})
     
 def say_whatsup(request):
     return HttpResponse("Hello, WHAT IS UP?")
