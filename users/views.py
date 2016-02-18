@@ -5,27 +5,47 @@ from django.contrib.auth import authenticate, login, logout
 
 # Create your views here.
 import users.forms
+import tasks.forms
 # import users.models
+import re as regex
 
 
 def register(request):
 	if request.method != 'POST':
-		return HttpResponse('Access Error')
+		return HttpResponse('Request Error')
 	else:
 		# print(request.POST)
 		form = users.forms.RegisterForm(request.POST)
 		if form.is_valid():
 			formData = form.cleaned_data
-			newUser = User.objects.create_user(username=formData['email'], password=formData['password'], first_name=formData['fl_name'])
+			if formData['password'] != formData['password_confirmation']:
+				return redirect('/', {'errors': ''})
+			try:
+				newUser = User.objects.create_user(username=formData['email'], password=formData['password'], first_name=formData['fl_name'])
+			except Exception, e:
+				print e
+				if regex.search(r'.*UNIQUE.*', str(e)):
+					errors = '?errors=Account+with+this+email+already+exists!'
+				else:
+					errors = ''
+				return redirect('/' + errors)
+			user = authenticate(username=formData['email'], password=formData['password'])
+			login(request, user)
+			return redirect('/user/dashboard')
 		else:
-			return HttpResponse('Invalid Form.')
+			print(form.errors.as_data())
+			if regex.search(r'.*Enter a valid email address.*', str(form.errors.as_data()['email'])):
+					errors = '?errors=Invalid+email+address'
+			else:
+				errors = '?errors=Invalid+Form.'
+			return redirect('/' + errors)
 	
 		return HttpResponse('Processing.')
 
 
 def login_user(request):
 	if request.method != 'POST':
-		return HttpResponse('Access Error')
+		return HttpResponse('Request Error')
 	else:
 		form = users.forms.LoginForm(request.POST)
 		if form.is_valid():
@@ -34,11 +54,11 @@ def login_user(request):
 			if user is not None:
 				print('Valid user!!')
 				login(request, user)
-				# return redirect('/user/dashboard')
-				return redirect('/')
+				return redirect('/user/dashboard')
+				# return redirect('/')
 			else:
-				print('The username and password were incorrect.')
-				return redirect('/')
+				# print('The username and password were incorrect.')
+				return redirect('/?errors=Invalid+password')
 			
 		else:
 			return HttpResponse('Invalid Form.')
@@ -56,7 +76,7 @@ def logout_user(request):
 
 def dashboard(request):
 	if request.user.is_authenticated():
-		return render(request, 'dashboard.html')
+		return render(request, 'dashboard.html', {'CreateTaskForm' : tasks.forms.CreateTaskForm(), 'currentUser': request.user})
 	else:
 		return HttpResponse("You are not authorized to be here.")
 

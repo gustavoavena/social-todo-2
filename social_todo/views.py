@@ -7,7 +7,11 @@ import users.forms as forms
 def index(request):
 	RegisterForm = forms.RegisterForm()
 	LoginForm = forms.LoginForm()
-	return render(request, 'index.html', {"title": "cpsc 113", "message": "Starting page!", 'RegisterForm' : RegisterForm, 'LoginForm': LoginForm})
+	if 'errors' in request.GET.keys():
+		errors = request.GET['errors'] 
+	else:
+		errors = None
+	return render(request, 'index.html', {"title": "cpsc 113", "message": "Starting page!", 'RegisterForm' : RegisterForm, 'LoginForm': LoginForm, 'errors': errors})
     
 
 
