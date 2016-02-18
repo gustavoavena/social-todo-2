@@ -65,22 +65,22 @@
 							<div class="box-header">
 								<h2>Your tasks</h2>
 							</div>
-								{% for this in task %}
-										{% if this.isComplete %}
+								{% for task in userTasks %}
+										<!-- {% if task.isComplete %} -->
 									<div class="tasks-list-item complete-task">
-								        <a href="/task/complete?id={# this._id #}"><span class="tasks-list-mark toggle-task"></span></a>
-								        <span class="tasks-list-desc task-title "><strike>{{this.title}}</strike></span>
-								        <p class="tasks-list-desc"><strike>{{this.description}}</strike></p>
-								        {% else %}
+								        <a href="/task/complete?id={# task._id #}"><span class="tasks-list-mark toggle-task"></span></a>
+								        <span class="tasks-list-desc task-title "><strike>{{task.title}}</strike></span>
+								        <p class="tasks-list-desc"><strike>{{task.description}}</strike></p>
+								        <!-- {% else %} -->
 								        <div class="tasks-list-item ">
-								        <a href="/task/complete?id={# this.id #}"><span class="tasks-list-mark toggle-task"></span></a>
-								        <span class="tasks-list-desc task-title ">{{this.title}}</span>
-								        <p class="tasks-list-desc">{{this.description}}</p>
-								        {% endif %}
+								        <a href="/task/complete?id={# task.id #}"><span class="tasks-list-mark toggle-task"></span></a>
+								        <span class="tasks-list-desc task-title ">{{task.title}}</span>
+								        <p class="tasks-list-desc">{{task.description}}</p>
+								        <!-- {% endif %} -->
 
 
-								        {% if this.mine %}						  
-										<a href="/task/remove?id={# this.id #}"><button type="button"class="delete-task button" name="delete">
+								        {% if task.mine %}						  
+										<a href="/task/remove?id={# task.id #}"><button type="button"class="delete-task button" name="delete">
 											Delete
 										</button></a>
 										{% endif %}

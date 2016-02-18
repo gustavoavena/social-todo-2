@@ -6,6 +6,7 @@ from django.contrib.auth import authenticate, login, logout
 # Create your views here.
 import users.forms
 import tasks.forms
+import tasks.models
 # import users.models
 import re as regex
 
@@ -76,7 +77,7 @@ def logout_user(request):
 
 def dashboard(request):
 	if request.user.is_authenticated():
-		return render(request, 'dashboard.html', {'CreateTaskForm' : tasks.forms.CreateTaskForm(), 'currentUser': request.user})
+		return render(request, 'dashboard.html', {'CreateTaskForm' : tasks.forms.CreateTaskForm(), 'currentUser': request.user, 'userTasks': tasks.models.Task.objects.all()})
 	else:
 		return HttpResponse("You are not authorized to be here.")
 

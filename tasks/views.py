@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 
 from . import forms
@@ -24,12 +24,14 @@ def create(request):
 			print(formData)
 			#I'm still missing collaborators.
 			newTask = models.Task(owner=request.user, title=formData['title'], description=formData['description'])
+			newTask.save()
+			print('Task saved: ', newTask)
 			#create new task.
 		else:
 			print(form.errors.as_data())
 			return HttpResponse('Invalid Form.')
 	
-		return HttpResponse('Processing.')
+		return redirect('/user/dashboard')
 
 
 def complete(request):
