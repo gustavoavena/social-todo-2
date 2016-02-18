@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 
 from . import forms
+from . import models
 # Create your views here.
 
 def index(request):
@@ -16,11 +17,16 @@ def create(request):
 	if request.method != 'POST':
 		return HttpResponse('Request Error')
 	else: 
-		form = users.forms.CreateTaskForm(request.POST)
+		# print(request.POST)
+		form = forms.CreateTaskForm(request.POST)
 		if form.is_valid():
 			formData = form.cleaned_data
+			print(formData)
+			#I'm still missing collaborators.
+			newTask = models.Task(owner=request.user, title=formData['title'], description=formData['description'])
 			#create new task.
 		else:
+			print(form.errors.as_data())
 			return HttpResponse('Invalid Form.')
 	
 		return HttpResponse('Processing.')
