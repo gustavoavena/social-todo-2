@@ -77,7 +77,11 @@ def logout_user(request):
 
 def dashboard(request):
 	if request.user.is_authenticated():
-		return render(request, 'dashboard.html', {'CreateTaskForm' : tasks.forms.CreateTaskForm(), 'currentUser': request.user, 'userTasks': tasks.models.Task.objects.all()})
+		if 'errors' in request.GET.keys():
+			errors = request.GET['errors'] 
+		else:
+			errors = None
+		return render(request, 'dashboard.html', {'errors':errors, 'CreateTaskForm' : tasks.forms.CreateTaskForm(), 'currentUser': request.user, 'userTasks': tasks.models.Task.objects.all()})
 	else:
 		return HttpResponse("You are not authorized to be here.")
 

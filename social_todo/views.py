@@ -1,10 +1,12 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 
 import users.forms as forms
 # Create your views here.
 
 def index(request):
+	if request.user.is_authenticated():
+		return redirect('/user/dashboard')
 	RegisterForm = forms.RegisterForm()
 	LoginForm = forms.LoginForm()
 	if 'errors' in request.GET.keys():

@@ -23,7 +23,7 @@ def create(request):
 			formData = form.cleaned_data
 			print(formData)
 			#I'm still missing collaborators.
-			newTask = models.Task(owner=request.user, title=formData['title'], description=formData['description'])
+			newTask = models.Task(owner=request.user, title=formData['title'], description=formData['description'], isComplete=False)
 			newTask.save()
 			print('Task saved: ', newTask)
 			#create new task.
@@ -35,11 +35,28 @@ def create(request):
 
 
 def complete(request):
-	return HttpResponse("COMPLETE TASK")
+	if 'id' in request.GET.keys():
+		id = request.GET['id']
+	else:
+		return redirect('/user/dashboard/?errors=Id+Not+Found.')
+
+	taskToToggle = models.Task.objects.filter(id=id)[0]
+	taskToToggle.isComplete = not taskToToggle.isComplete
+	taskToToggle.save()
+
+	return redirect('/user/dashboard')
 
 
 def remove(request):
-	return HttpResponse("REMOVE TASK")
+	if 'id' in request.GET.keys():
+		id = request.GET['id']
+	else:
+		return redirect('/user/dashboard/?errors=Id+Not+Found.')
+
+	taskToToggle = models.Task.objects.filter(id=id)[0]
+	taskToToggle.delete()
+
+	return redirect('/user/dashboard')
 
 
 

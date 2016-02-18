@@ -14,10 +14,8 @@
 	<!-- Custom Stylesheet -->
 
 	<link rel="stylesheet" href="{% static 'social_todo/css/style.css' %}">
-
-
-	<!-- <link href="/static/css/reset.css" rel="stylesheet"> -->
-	<link href="/css/dashboard.css" rel="stylesheet">
+	<!-- <link href="{%  static 'social_todo/css/reset.css' %}" rel="stylesheet"> -->
+	<link href="{% static 'social_todo/css/dashboard.css' %}" rel="stylesheet">
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 </head>
@@ -66,21 +64,21 @@
 								<h2>Your tasks</h2>
 							</div>
 								{% for task in userTasks %}
-										<!-- {% if task.isComplete %} -->
+										{% if task.isComplete %}
 									<div class="tasks-list-item complete-task">
-								        <a href="/task/complete?id={# task._id #}"><span class="tasks-list-mark toggle-task"></span></a>
+								        <a href="/task/complete?id={{ task.id }}"><span class="tasks-list-mark toggle-task"></span></a>
 								        <span class="tasks-list-desc task-title "><strike>{{task.title}}</strike></span>
 								        <p class="tasks-list-desc"><strike>{{task.description}}</strike></p>
-								        <!-- {% else %} -->
-								        <div class="tasks-list-item ">
-								        <a href="/task/complete?id={# task.id #}"><span class="tasks-list-mark toggle-task"></span></a>
+								        {% else %}
+								    <div class="tasks-list-item ">
+								        <a href="/task/complete?id={{ task.id }}"><span class="tasks-list-mark toggle-task"></span></a>
 								        <span class="tasks-list-desc task-title ">{{task.title}}</span>
 								        <p class="tasks-list-desc">{{task.description}}</p>
-								        <!-- {% endif %} -->
+								        {% endif %}
 
 
-								        {% if task.mine %}						  
-										<a href="/task/remove?id={# task.id #}"><button type="button"class="delete-task button" name="delete">
+								        {% if task.owner == currentUser %}						  
+										<a href="/task/remove?id={{ task.id }}"><button type="button"class="delete-task button" name="delete">
 											Delete
 										</button></a>
 										{% endif %}
