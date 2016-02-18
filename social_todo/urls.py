@@ -16,7 +16,7 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 
-from . import views
+from . import views as social_todo_views
 
 
 
@@ -24,7 +24,7 @@ from . import views
 
 #need to import tasks.views.py file!!
 urlpatterns = [
-    url(r'^$', views.index, name='index'),
+    url(r'^$', social_todo_views.index, name='index'),
     url(r'^task/', include('tasks.urls')),
     url(r'^user/', include('users.urls')),
     url(r'^admin/', admin.site.urls),
