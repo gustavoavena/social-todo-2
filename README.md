@@ -10,4 +10,8 @@ The staff gave us a small starting code, and we were supposed to develop this so
 
 We had around around one week to do this.
 
+The app is deployed on heroku and can be tested here:
+
+https://cpsc113-social-todo-gustavo.herokuapp.com
+
 
