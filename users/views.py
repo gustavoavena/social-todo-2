@@ -25,7 +25,7 @@ def register(request):
 			try:
 				newUser = User.objects.create_user(username=formData['email'], password=formData['password'], first_name=formData['fl_name'])
 			except Exception, e:
-				print e
+				# print e
 				if regex.search(r'.*UNIQUE.*', str(e)):
 					errors = '?errors=Account+with+this+email+already+exists!'
 				else:
@@ -35,7 +35,7 @@ def register(request):
 			login(request, user)
 			return redirect('/user/dashboard')
 		else:
-			print(form.errors.as_data())
+			# print(form.errors.as_data())
 			if 'email' in form.errors.as_data().keys() and regex.search(r'.*Enter a valid email address.*', str(form.errors.as_data()['email'])):
 					errors = '?errors=Invalid+email+address'
 			else:
@@ -53,7 +53,7 @@ def login_user(request):
 		if form.is_valid():
 			formData = form.cleaned_data
 			user = authenticate(username=formData['email'], password=formData['password'])
-			print(authenticate(username=formData['email'], password=formData['password']))
+			# print(authenticate(username=formData['email'], password=formData['password']))
 			# print(form.errors.as_data())
 			if user is not None:
 				print('Valid user!!')
@@ -76,7 +76,7 @@ def login_user(request):
 
 
 def logout_user(request):
-	print('User logged out!')
+	# print('User logged out!')
 	logout(request)
 	return redirect('/')
 	# return HttpResponse("USER LOGOUT")
@@ -89,7 +89,7 @@ def dashboard(request):
 			errors = request.GET['errors'] 
 		else:
 			errors = None
-			print(request.user.tasks.all())
+			# print(request.user.tasks.all())
 		userTasks = list(request.user.owned_tasks.all()) + list(request.user.tasks.all())
 		return render(request, 'dashboard.html', {'errors':errors, 'CreateTaskForm' : tasks.forms.CreateTaskForm(), 'currentUser': request.user, 'userTasks': userTasks})
 	else:

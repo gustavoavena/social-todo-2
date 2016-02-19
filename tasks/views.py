@@ -36,7 +36,7 @@ def create(request):
 				if u:
 					newTask.collaborators.add(u[0])
 			newTask.save()
-			# print('Task saved: ', newTask.title, newTask.description, newTask.collaborators)
+			print('Task saved: ' + newTask.title + '\n\n')
 
 			#create new task.
 		else:

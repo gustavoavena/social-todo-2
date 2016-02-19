@@ -46,7 +46,7 @@
 							<div class="box-header">
 								<h2>Add a new task</h2>
 							</div>
-							<form id="create" action="/task/create"  method="post">
+							<form action="/task/create" id="create_task_form" method="post">
 		      					{% csrf_token %}
 		    					{% for field in CreateTaskForm %}
 		    						{%  if field.label == 'Title' or field.label == 'Description' %}
@@ -54,7 +54,7 @@
 			    					{%  endif %}
 		        					{{ field }}<br>
 		     					{% endfor %}
-								<button type="submit" form="create" value="Submit">Submit</button>
+								<button type="submit" form="create_task_form" value="Submit">Submit</button>
 							</form>
 						</div>
 					</div>
@@ -70,7 +70,7 @@
 								        <span class="tasks-list-desc task-title "><strike>{{task.title}}</strike></span>
 								        <p class="tasks-list-desc"><strike>{{task.description}}</strike></p>
 								        {% else %}
-								    <div class="tasks-list-item ">
+								    <div class="tasks-list-item">
 								        <a href="/task/complete?id={{ task.id }}"><span class="tasks-list-mark toggle-task"></span></a>
 								        <span class="tasks-list-desc task-title ">{{task.title}}</span>
 								        <p class="tasks-list-desc">{{task.description}}</p>
@@ -89,7 +89,7 @@
 					</div>
 		      	</div>
 
-      		<div class="row" style:"min-height:40%">
+      		<div class="row" style="min-height:40%">
 			<br/>
 			<br/>
 			<br/>
