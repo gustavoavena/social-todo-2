@@ -57,7 +57,7 @@ DATABASES['default'].update(db_from_env)
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
-
+#This configures static files
 
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 

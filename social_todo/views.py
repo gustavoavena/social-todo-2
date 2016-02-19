@@ -4,6 +4,9 @@ from django.http import HttpResponse
 import users.forms as forms
 # Create your views here.
 
+
+#this is the index controller. It will render the log in and register page as well as redirect to the user's
+#dashboard if there is a logged in user.
 def index(request):
 	if request.user.is_authenticated():
 		return redirect('/user/dashboard')
@@ -22,7 +25,3 @@ def index(request):
 
 
 
-
-#django-admin startapp users
-#create a file called urls.py in new subapp
-#edit urls.py in social-todo/urls following the model of tasks to route to new subapp

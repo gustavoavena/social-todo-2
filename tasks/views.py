@@ -8,13 +8,6 @@ from . import models
 from django.contrib.auth.models import User
 # Create your views here.
 
-def index(request):
-	return HttpResponse("Hello, world. You're at the tasks index.")
-	# return render(request, 'index.html', {"title": "hasuaus", "message": "testing variables"})
-	
-def say_whatsup(request):
-	return HttpResponse("Hello, WHAT IS UP?")
-
 
 @login_required
 def create(request):
