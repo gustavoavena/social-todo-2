@@ -33,6 +33,7 @@ def register(request):
 				return redirect('/' + errors)
 			user = authenticate(username=formData['email'], password=formData['password'])
 			login(request, user)
+			print('New user registered! User: ' + user.username + '. Logging user in...')
 			return redirect('/user/dashboard')
 		else:
 			# print(form.errors.as_data())
