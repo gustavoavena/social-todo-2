@@ -16,3 +16,4 @@ Werkzeug==0.11.2
 wheel==0.26.0
 whitenoise==2.0.6
 XlsxWriter==0.7.6
+psycopg2==2.6.1
