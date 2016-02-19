@@ -17,7 +17,7 @@
 
 
 	<!-- <link href="/static/css/reset.css" rel="stylesheet"> -->
-	<link href="/css/dashboard.css" rel="stylesheet">
+	<link rel="stylesheet" href="{% static 'social_todo/css/dashboard.css' %}">
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 </head>
@@ -25,6 +25,9 @@
 
 <div class="container">
 		<div class="top">
+			<div id="head">
+				<a style="color:white" href="/user/logout">Log Out</a>
+			</div>
 			<h1 id="title" class="hidden"><span id="logo">CPSC113 <span>Todo</span></span></h1>
 		</div>
 
