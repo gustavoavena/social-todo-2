@@ -3,3 +3,4 @@ todo-e2e-tests-master
 
 *.pyc
 testing_script
+testing_script/*
