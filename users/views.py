@@ -27,7 +27,7 @@ def register(request):
 			try:
 				newUser = User.objects.create_user(username=formData['email'], password=formData['password'], first_name=formData['fl_name'])
 			except Exception, e:
-				if regex.search(r'.*UNIQUE.*', str(e)):
+				if regex.search(r'.*unique.*', str(e)):
 					errors = '?errors=Account+with+this+email+already+exists!'
 				else:
 					print('error creating user:')
