@@ -53,8 +53,6 @@ def login_user(request):
 		if form.is_valid():
 			formData = form.cleaned_data
 			user = authenticate(username=formData['email'], password=formData['password'])
-			# print(authenticate(username=formData['email'], password=formData['password']))
-			# print(form.errors.as_data())
 			if user is not None:
 				print('Valid user!!')
 				login(request, user)
@@ -63,14 +61,18 @@ def login_user(request):
 			else:
 				try:
 					existingUser = User.objects.get(username=formData['email'])
+
 				except Exception, e:
 					return redirect('/?errors=Invalid+email+address')
 				# print('The username and password were incorrect.')
 				return redirect('/?errors=Invalid+password')
 			
 		else:
-			return HttpResponse('Invalid Form.')
-	
+			if 'email' in form.errors.as_data().keys():
+				errors = '?errors=Invalid+email+address'
+			else:
+				errors = '?errors=Invalid+Form.'
+			return redirect('/' + errors)
 
 	return HttpResponse("USER LOGIN")
 
@@ -86,8 +88,10 @@ def logout_user(request):
 def dashboard(request):
 	if request.user.is_authenticated():
 		if 'errors' in request.GET.keys():
-			errors = request.GET['errors'] 
+			errors = request.GET['errors']
+			# print(errors) 
 		else:
+			# print('No error.')
 			errors = None
 			# print(request.user.tasks.all())
 		userTasks = list(request.user.owned_tasks.all()) + list(request.user.tasks.all())

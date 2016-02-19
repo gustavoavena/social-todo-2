@@ -1,32 +1,13 @@
-# Social todo Django starter code
+Social todo 2
 
-We wrote this in office hours. It defines the models for tasks,
-migrations, etc. It is based on the 
-[Django tutorial](https://docs.djangoproject.com/en/1.9/intro/).
+Gustavo Avena
+gustavo.avena@yale.edu
 
-To install this on c9, clone the repository. Then, before you run it
-for the first time, you'd do
 
-```
-virtualenv env
-source env/bin/activate
-pip install -r requirements.txt
-```
-This installs your Python dependencies. Then you need to run your database
-migrations with 
+This is an assignment for CPSC 113 - Programming and Entrepreneurship.
 
-```
-python manage.py migrate
-```
+The staff gave us a small starting code, and we were supposed to develop this social todo app that passes all the tests in the test script (developed using casperjs).
 
-This will create a file called `db.sqlite3`, which is ignored in your
-`.gitignore` file. 
+We had around around one week to do this.
 
-Now you're ready to run the application.Then you can run it with the following
 
-```
-python manage.py runserver 0.0.0.0:$PORT
-```
-
-Then you can click "Preview" in the c9 interface to see your running application.
-Off to the races.

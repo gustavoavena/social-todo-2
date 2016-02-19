@@ -10,9 +10,12 @@ def index(request):
 	RegisterForm = forms.RegisterForm()
 	LoginForm = forms.LoginForm()
 	if 'errors' in request.GET.keys():
-		errors = request.GET['errors'] 
+		errors = request.GET['errors']
+		print(errors)
+		
 	else:
 		errors = None
+		print('No errors.')
 	return render(request, 'index.html', {"title": "cpsc 113", "message": "Starting page!", 'RegisterForm' : RegisterForm, 'LoginForm': LoginForm, 'errors': errors})
     
 
