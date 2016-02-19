@@ -14,10 +14,12 @@ import re as regex
 
 def register(request):
 	if request.method != 'POST':
+		print('Wrong request method for registering.')
 		return HttpResponse('Request Error')
 	else:
 		# print(request.POST)
 		form = users.forms.RegisterForm(request.POST)
+		print('New user registering. Fetching form data...')
 		if form.is_valid():
 			formData = form.cleaned_data
 			if formData['password'] != formData['password_confirmation']:
