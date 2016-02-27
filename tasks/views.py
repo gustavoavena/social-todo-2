@@ -57,7 +57,10 @@ def remove(request):
 	else:
 		return redirect('/user/dashboard/?errors=Id+Not+Found.')
 
-	taskToToggle = models.Task.objects.filter(id=id)[0]
+	try:
+		taskToToggle = models.Task.objects.filter(id=id)[0]
+	except:
+		return redirect('/user/dashboard/?errors=Task+Not+Found.') 
 	taskToToggle.delete() #deletes the task from the db.
 
 	return redirect('/user/dashboard')
